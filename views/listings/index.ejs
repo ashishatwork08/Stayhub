@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+  <h3 class="mb-4">All Listings</h3>
+
+  <div class="row g-4">
+    <% for (let listing of allListings) { %>
+
+      <% 
+        // Safe image handling
+        let imageUrl =
+          "https://images.unsplash.com/photo-1505691938895-1758d7feb511";
+        if (listing.image && listing.image.url) {
+          imageUrl = listing.image.url;
+        }
+      %>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+
+          <!-- IMAGE -->
+          <img
+            src="<%= imageUrl %>"
+            class="card-img-top"
+            alt="listing image"
+            style="height: 220px; object-fit: cover;"
+          >
+
+          <!-- CARD BODY -->
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= listing.title %>
+            </h5>
+
+            <p class="card-text text-muted">
+              ₹ <%= listing.price %> · <%= listing.location %>
+            </p>
+
+            <a
+              href="/listings/<%= listing._id %>"
+              class="btn btn-outline-primary">
+              View Listing
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    <% } %>
+  </div>
+</div>
